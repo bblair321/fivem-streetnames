@@ -20,41 +20,42 @@ Citizen.CreateThread(function()
         local zoneName = GetLabelText(zoneCode) or "Unknown Zone"
 
         -- Style colors
-        local textColor = { r = 255, g = 255, b = 255 }         -- white
-        local boxColor = { r = 10, g = 20, b = 50, a = 200 }    -- navy blue
+        local textColor = { r = 255, g = 255, b = 255 }
+        local boxColor = { r = 10, g = 20, b = 50, a = 200 }
 
-        -- Auto-size box width based on longest line
+        -- Determine the longest line
         local longestLine = (#streetDisplay > #zoneName) and streetDisplay or zoneName
         local charWidth = 0.006
         local padding = 0.015
         local rectWidth = padding + (string.len(longestLine) * charWidth)
 
-        -- Position
+        -- Box position and size
         local rectX = 0.5
-        local rectY = 0.04       -- Top-center
-        local rectHeight = 0.065 -- Taller box to fit 2 lines
+        local rectY = 0.04
+        local rectHeight = 0.065
 
-        -- Draw background box
+        -- Draw background
         DrawRect(rectX, rectY, rectWidth, rectHeight, boxColor.r, boxColor.g, boxColor.b, boxColor.a)
 
-        -- Draw street text (top line)
-        SetTextFont(4)
-        SetTextProportional(1)
-        SetTextScale(0.5, 0.5)
-        SetTextColour(textColor.r, textColor.g, textColor.b, 255)
-        SetTextCentre(true)
-        SetTextDropshadow(1, 0, 0, 0, 255)
-        SetTextEdge(2, 0, 0, 0, 255)
-        SetTextOutline()
-        SetTextEntry("STRING")
-        AddTextComponentString(streetDisplay)
-        DrawText(rectX, rectY - 0.018)  -- top line inside box
+        -- Text settings shared for both lines
+        local function drawCenteredText(text, x, y, scale)
+            SetTextFont(4)
+            SetTextProportional(1)
+            SetTextScale(scale, scale)
+            SetTextColour(textColor.r, textColor.g, textColor.b, 255)
+            SetTextCentre(true)
+            SetTextDropshadow(1, 0, 0, 0, 255)
+            SetTextEdge(2, 0, 0, 0, 255)
+            SetTextOutline()
+            SetTextEntry("STRING")
+            AddTextComponentString(text)
+            DrawText(x, y)
+        end
 
-        -- Draw zone text (bottom line)
-        SetTextFont(0)
-        SetTextScale(0.4, 0.4)
-        SetTextEntry("STRING")
-        AddTextComponentString(zoneName)
-        DrawText(rectX, rectY + 0.005)  -- lower inside box
+        -- Draw street name (top)
+        drawCenteredText(streetDisplay, rectX, rectY - 0.018, 0.5)
+
+        -- Draw zone name (bottom)
+        drawCenteredText(zoneName, rectX, rectY + 0.005, 0.5)
     end
 end)
