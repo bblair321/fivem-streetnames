@@ -25,10 +25,11 @@ Citizen.CreateThread(function()
         local timeStr = string.format("%02d:%02d", hour, minute)
 
         -- HUD position
-        local boxCenterX = 0.5
-        local boxCenterY = boxHeight / 2
         local boxWidth = 0.24
         local boxHeight = 0.09
+        local boxCenterX = 0.5
+        local boxCenterY = boxHeight / 2  -- this line must come after boxHeight is defined
+
 
         -- Colors
         local bgColor = { r = 5, g = 15, b = 30, a = 200 }
