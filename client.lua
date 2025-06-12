@@ -14,16 +14,20 @@ Citizen.CreateThread(function()
             displayText = displayText .. " & " .. streetName2
         end
 
-        -- HUD position
+        -- Calculate dynamic width based on string length
+        local charWidth = 0.006  -- Approximate width of each character
+        local padding = 0.015    -- Padding on both sides
+        local rectWidth = padding + (string.len(displayText) * charWidth)
+
+        -- Position
         local rectX = 0.5
-        local rectY = 0.045  -- slightly lower
-        local rectWidth = 0.32
-        local rectHeight = 0.045
+        local rectY = 0.045
+        local rectHeight = 0.035
 
         -- Draw black background rectangle
         DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 180)
 
-        -- Draw centered yellow text
+        -- Draw centered text
         SetTextFont(4)
         SetTextProportional(1)
         SetTextScale(0.5, 0.5)
