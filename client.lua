@@ -22,6 +22,24 @@ Citizen.CreateThread(function()
         local minute = GetClockMinutes()
         local timeStr = string.format("%02d:%02d", hour, minute)
 
+        -- Compass
+        local heading = GetEntityHeading(playerPed)
+
+        local function getCompassDirection(deg)
+            if deg >= 337.5 or deg < 22.5 then return "N"
+            elseif deg < 67.5 then return "NE"
+            elseif deg < 112.5 then return "E"
+            elseif deg < 157.5 then return "SE"
+            elseif deg < 202.5 then return "S"
+            elseif deg < 247.5 then return "SW"
+            elseif deg < 292.5 then return "W"
+            else return "NW" end
+        end
+
+        local compass = getCompassDirection(heading)
+        local topLine = timeStr .. "   [" .. compass .. "]"
+
+
         -- Position and size
         local boxWidth = 0.26
         local boxHeight = 0.08 -- tighter height
@@ -48,7 +66,7 @@ Citizen.CreateThread(function()
         end
 
         -- Clock (centered top line)
-        drawText(boxCenterX, boxCenterY - 0.030, timeStr, 4, 0.42, valueColor, true)
+        drawText(boxCenterX, boxCenterY - 0.030, topLine, 4, 0.42, valueColor, true)
 
         -- STREET
         drawText(boxCenterX - 0.1, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false)
