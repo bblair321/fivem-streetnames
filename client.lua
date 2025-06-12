@@ -16,25 +16,25 @@ Citizen.CreateThread(function()
 
         -- HUD position
         local rectX = 0.5
-        local rectY = 0.03
-        local rectWidth = 0.3
-        local rectHeight = 0.035
+        local rectY = 0.045  -- slightly lower
+        local rectWidth = 0.32
+        local rectHeight = 0.045
 
         -- Draw black background rectangle
-        DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 150)
+        DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 180)
 
         -- Draw centered yellow text
         SetTextFont(4)
         SetTextProportional(1)
-        SetTextScale(0.6, 0.6)
-        SetTextColour(255, 255, 0, 255) -- yellow
-        SetTextCentre(true) -- ← this is the key for perfect centering
+        SetTextScale(0.5, 0.5)
+        SetTextColour(255, 255, 0, 255)
+        SetTextCentre(true)
         SetTextDropshadow(0, 0, 0, 0, 255)
         SetTextEdge(1, 0, 0, 0, 255)
         SetTextDropShadow()
         SetTextOutline()
         SetTextEntry("STRING")
         AddTextComponentString(displayText)
-        DrawText(rectX, rectY - 0.0125)
+        DrawText(rectX, rectY - 0.012)
     end
 end)
