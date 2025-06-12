@@ -19,44 +19,45 @@ Citizen.CreateThread(function()
         local zoneCode = GetNameOfZone(coords.x, coords.y, coords.z)
         local zoneName = GetLabelText(zoneCode) or "Unknown Zone"
 
-        -- Settings
-        local baseX = 0.015
-        local baseY = 0.89
-        local lineHeight = 0.03
-        local boxWidth = 0.36
-        local boxHeight = 0.075
+        -- Box position and dimensions
+        local boxCenterX = 0.5
+        local boxCenterY = 0.94
+        local boxWidth = 0.18   -- compact width
+        local boxHeight = 0.06  -- enough for two lines
 
         -- Colors
-        local bgColor = { r = 5, g = 15, b = 30, a = 220 } -- dark blue
-        local labelColor = { r = 100, g = 180, b = 255, a = 255 } -- bluish text
-        local valueColor = { r = 255, g = 255, b = 255, a = 255 } -- white
+        local bgColor = { r = 5, g = 15, b = 30, a = 200 }
+        local labelColor = { r = 100, g = 180, b = 255, a = 255 }
+        local valueColor = { r = 255, g = 255, b = 255, a = 255 }
 
         -- Draw background box
-        DrawRect(baseX + (boxWidth / 2), baseY + (boxHeight / 2), boxWidth, boxHeight, bgColor.r, bgColor.g, bgColor.b, bgColor.a)
+        DrawRect(boxCenterX, boxCenterY, boxWidth, boxHeight, bgColor.r, bgColor.g, bgColor.b, bgColor.a)
 
-        -- Function to draw labeled lines
-        local function drawLabeledLine(label, value, yOffset)
-            local labelX = baseX + 0.005
-            local valueX = baseX + 0.09
-            local y = baseY + yOffset
+        -- Function to draw label + value centered inside the box
+        local function drawLine(label, value, lineOffset)
+            local labelX = boxCenterX - 0.075
+            local valueX = boxCenterX - 0.01
+            local y = boxCenterY - 0.025 + lineOffset
 
+            -- Label
             SetTextFont(0)
-            SetTextScale(0.35, 0.35)
+            SetTextScale(0.3, 0.3)
             SetTextColour(labelColor.r, labelColor.g, labelColor.b, labelColor.a)
             SetTextEntry("STRING")
             AddTextComponentString(label)
             DrawText(labelX, y)
 
+            -- Value
             SetTextFont(4)
-            SetTextScale(0.38, 0.38)
+            SetTextScale(0.32, 0.32)
             SetTextColour(valueColor.r, valueColor.g, valueColor.b, valueColor.a)
             SetTextEntry("STRING")
             AddTextComponentString(value)
             DrawText(valueX, y)
         end
 
-        -- Draw lines
-        drawLabeledLine("STREET:", streetDisplay, 0.005)
-        drawLabeledLine("ZONE:", zoneName, 0.035)
+        -- Draw both lines
+        drawLine("STREET:", streetDisplay, 0.0)
+        drawLine("ZONE:  ", zoneName, 0.025)
     end
 end)
