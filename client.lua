@@ -26,7 +26,7 @@ Citizen.CreateThread(function()
 
         -- HUD position
         local boxCenterX = 0.5
-        local boxCenterY = 0.085 -- near top
+        local boxCenterY = boxHeight / 2
         local boxWidth = 0.24
         local boxHeight = 0.09
 
