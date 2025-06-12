@@ -14,25 +14,27 @@ Citizen.CreateThread(function()
             displayText = displayText .. " & " .. streetName2
         end
 
-        -- Draw background rectangle (black, semi-transparent)
+        -- HUD position
         local rectX = 0.5
         local rectY = 0.03
         local rectWidth = 0.3
-        local rectHeight = 0.03
+        local rectHeight = 0.035
+
+        -- Draw black background rectangle
         DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 150)
 
-        -- Draw the street name text (yellow)
+        -- Draw centered yellow text
         SetTextFont(4)
         SetTextProportional(1)
         SetTextScale(0.6, 0.6)
-        SetTextColour(255, 255, 0, 255) -- bright yellow
+        SetTextColour(255, 255, 0, 255) -- yellow
+        SetTextCentre(true) -- ← this is the key for perfect centering
         SetTextDropshadow(0, 0, 0, 0, 255)
         SetTextEdge(1, 0, 0, 0, 255)
         SetTextDropShadow()
         SetTextOutline()
         SetTextEntry("STRING")
         AddTextComponentString(displayText)
-        -- Center the text horizontally at 0.5, vertically at rectY - half rect height
-        DrawText(rectX - (string.len(displayText) * 0.0035), rectY - (rectHeight / 2) + 0.005)
+        DrawText(rectX, rectY - 0.0125)
     end
 end)
