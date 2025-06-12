@@ -68,11 +68,12 @@ Citizen.CreateThread(function()
             DrawText(x, y)
         end
 
-        -- Clock + compass (centered, bold font)
-        drawText(boxCenterX, boxCenterY - 0.040, topLine, 4, 0.48, valueColor, true)
+        -- Move clock + compass text higher (up the screen)
+        drawText(boxCenterX, boxCenterY - 0.05, topLine, 4, 0.48, valueColor, true)
 
-        -- Horizontal divider line below clock/compass
-        DrawRect(boxCenterX, boxCenterY - 0.020, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
+        -- Draw horizontal line well below the clock/compass text, with a decent margin
+        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
+
 
         -- Labels (right aligned)
         drawText(boxCenterX - 0.05, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false, true)
