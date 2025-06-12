@@ -24,7 +24,6 @@ Citizen.CreateThread(function()
 
         -- Compass
         local heading = GetEntityHeading(playerPed)
-
         local function getCompassDirection(deg)
             if deg >= 337.5 or deg < 22.5 then return "N"
             elseif deg < 67.5 then return "NE"
@@ -35,48 +34,52 @@ Citizen.CreateThread(function()
             elseif deg < 292.5 then return "W"
             else return "NW" end
         end
-
         local compass = getCompassDirection(heading)
         local topLine = timeStr .. "   [" .. compass .. "]"
 
-
         -- Position and size
         local boxWidth = 0.26
-        local boxHeight = 0.08 -- tighter height
+        local boxHeight = 0.08
         local boxCenterX = 0.5
-        local boxCenterY = boxHeight / 2 + 0.003 -- flush to top with slight spacing
+        local boxCenterY = boxHeight / 2 + 0.003
 
         -- Colors
-        local bgColor = { r = 5, g = 15, b = 30, a = 220 }
-        local labelColor = { r = 100, g = 180, b = 255, a = 255 }
-        local valueColor = { r = 255, g = 255, b = 255, a = 255 }
+        local bgColor = { r = 10, g = 15, b = 40, a = 200 }       -- dark, transparent blue
+        local borderColor = { r = 40, g = 120, b = 255, a = 180 } -- electric blue border
+        local labelColor = { r = 130, g = 180, b = 255, a = 255 } -- softer blue
+        local valueColor = { r = 240, g = 245, b = 255, a = 255 } -- almost white
 
-        -- Draw background box
+        -- Draw background with border (border behind the box)
+        DrawRect(boxCenterX, boxCenterY, boxWidth + 0.006, boxHeight + 0.006, borderColor.r, borderColor.g, borderColor.b, borderColor.a)
         DrawRect(boxCenterX, boxCenterY, boxWidth, boxHeight, bgColor.r, bgColor.g, bgColor.b, bgColor.a)
 
-        -- Helper
-        local function drawText(x, y, text, font, scale, color, center)
+        -- Horizontal divider line below clock/compass
+        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
+
+        -- Text drawing helper function
+        local function drawText(x, y, text, font, scale, color, center, right)
             SetTextFont(font)
             SetTextScale(scale, scale)
             SetTextColour(color.r, color.g, color.b, color.a)
-            if center then SetTextCentre(true) end
+            SetTextCentre(center or false)
+            if right then
+                SetTextRightJustify(true)
+                SetTextWrap(0.0, x)
+            end
             SetTextEntry("STRING")
             AddTextComponentString(text)
             DrawText(x, y)
         end
 
-        -- Clock (centered top line)
-        drawText(boxCenterX, boxCenterY - 0.030, topLine, 4, 0.42, valueColor, true)
+        -- Clock + compass (centered, bold font)
+        drawText(boxCenterX, boxCenterY - 0.030, topLine, 4, 0.48, valueColor, true)
 
-        -- STREET
-        drawText(boxCenterX - 0.1, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false)
-        drawText(boxCenterX - 0.03, boxCenterY - 0.005, streetDisplay, 4, 0.30, valueColor, false)
+        -- Labels (right aligned)
+        drawText(boxCenterX - 0.05, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false, true)
+        drawText(boxCenterX - 0.05, boxCenterY + 0.020, "ZONE:", 0, 0.30, labelColor, false, true)
 
-        -- ZONE
-        drawText(boxCenterX - 0.1, boxCenterY + 0.020, "ZONE:", 0, 0.30, labelColor, false)
-        drawText(boxCenterX - 0.03, boxCenterY + 0.020, zoneName, 4, 0.30, valueColor, false)
-
-        -- Optional: draw a thin white border line at the bottom of box
-        DrawRect(boxCenterX, boxCenterY + (boxHeight / 2), boxWidth, 0.001, 255, 255, 255, 100)
+        -- Values (left aligned)
+        drawText(boxCenterX - 0.03, boxCenterY - 0.005, streetDisplay, 4, 0.32, valueColor, false)
+        drawText(boxCenterX - 0.03, boxCenterY + 0.020, zoneName, 4, 0.32, valueColor, false)
     end
 end)
