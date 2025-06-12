@@ -72,7 +72,7 @@ Citizen.CreateThread(function()
         drawText(boxCenterX, boxCenterY - 0.030, topLine, 4, 0.48, valueColor, true)
 
         -- Horizontal divider line below clock/compass
-        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
+        DrawRect(boxCenterX, boxCenterY - 0.015, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
 
         -- Labels (right aligned)
         drawText(boxCenterX - 0.05, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false, true)
