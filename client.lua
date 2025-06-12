@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
         end
 
         -- Move clock + compass text higher (up the screen)
-        drawText(boxCenterX, boxCenterY - 0.05, topLine, 4, 0.48, valueColor, true)
+        drawText(boxCenterX, boxCenterY - 0.04, topLine, 4, 0.48, valueColor, true)
 
         -- Draw horizontal line well below the clock/compass text, with a decent margin
         DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
