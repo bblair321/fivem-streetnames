@@ -49,12 +49,12 @@ Citizen.CreateThread(function()
         local labelColor = { r = 130, g = 180, b = 255, a = 255 } -- softer blue
         local valueColor = { r = 240, g = 245, b = 255, a = 255 } -- almost white
 
+        -- Horizontal divider line below clock/compass
+        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
+
         -- Draw background with border (border behind the box)
         DrawRect(boxCenterX, boxCenterY, boxWidth + 0.006, boxHeight + 0.006, borderColor.r, borderColor.g, borderColor.b, borderColor.a)
         DrawRect(boxCenterX, boxCenterY, boxWidth, boxHeight, bgColor.r, bgColor.g, bgColor.b, bgColor.a)
-
-        -- Horizontal divider line below clock/compass
-        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
 
         -- Text drawing helper function
         local function drawText(x, y, text, font, scale, color, center, right)
