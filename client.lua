@@ -25,7 +25,7 @@ Citizen.CreateThread(function()
         local rectHeight = 0.035
 
         -- Draw background box
-        DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 180)
+        DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 50)
 
         -- Draw text centered in box
         SetTextFont(4)
