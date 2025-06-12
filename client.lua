@@ -49,9 +49,6 @@ Citizen.CreateThread(function()
         local labelColor = { r = 130, g = 180, b = 255, a = 255 } -- softer blue
         local valueColor = { r = 240, g = 245, b = 255, a = 255 } -- almost white
 
-        -- Horizontal divider line below clock/compass
-        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
-
         -- Draw background with border (border behind the box)
         DrawRect(boxCenterX, boxCenterY, boxWidth + 0.006, boxHeight + 0.006, borderColor.r, borderColor.g, borderColor.b, borderColor.a)
         DrawRect(boxCenterX, boxCenterY, boxWidth, boxHeight, bgColor.r, bgColor.g, bgColor.b, bgColor.a)
@@ -73,6 +70,9 @@ Citizen.CreateThread(function()
 
         -- Clock + compass (centered, bold font)
         drawText(boxCenterX, boxCenterY - 0.030, topLine, 4, 0.48, valueColor, true)
+
+        -- Horizontal divider line below clock/compass
+        DrawRect(boxCenterX, boxCenterY - 0.01, boxWidth * 0.9, 0.0015, borderColor.r, borderColor.g, borderColor.b, 180)
 
         -- Labels (right aligned)
         drawText(boxCenterX - 0.05, boxCenterY - 0.005, "STREET:", 0, 0.30, labelColor, false, true)
