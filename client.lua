@@ -14,20 +14,20 @@ Citizen.CreateThread(function()
             displayText = displayText .. " & " .. streetName2
         end
 
-        -- Calculate dynamic width based on string length
-        local charWidth = 0.006  -- Approximate width of each character
-        local padding = 0.015    -- Padding on both sides
+        -- Auto-size black background box
+        local charWidth = 0.006
+        local padding = 0.015
         local rectWidth = padding + (string.len(displayText) * charWidth)
 
-        -- Position
+        -- Position near top center
         local rectX = 0.5
-        local rectY = 0.045
+        local rectY = 0.025 -- closer to top
         local rectHeight = 0.035
 
-        -- Draw black background rectangle
+        -- Draw background box
         DrawRect(rectX, rectY, rectWidth, rectHeight, 0, 0, 0, 180)
 
-        -- Draw centered text
+        -- Draw text centered in box
         SetTextFont(4)
         SetTextProportional(1)
         SetTextScale(0.5, 0.5)
@@ -39,6 +39,6 @@ Citizen.CreateThread(function()
         SetTextOutline()
         SetTextEntry("STRING")
         AddTextComponentString(displayText)
-        DrawText(rectX, rectY - 0.012)
+        DrawText(rectX, rectY - 0.012)  -- vertical offset for centering in box
     end
 end)
